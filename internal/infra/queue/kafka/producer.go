@@ -5,7 +5,7 @@ import (
 
 	"github.com/IBM/sarama"
 	"github.com/rafaelsouzaribeiro/apache-kafka/producer"
-	"github.com/rafaelsouzaribeiro/logs/pkg/utils"
+	utils "github.com/rafaelsouzaribeiro/logs/cmd"
 )
 
 type KafkaProducer struct {
