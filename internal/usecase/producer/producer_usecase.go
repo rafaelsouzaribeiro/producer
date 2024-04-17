@@ -1,7 +1,10 @@
 package producer
 
-func (c *ProducerUseCase) Producer(addrs []string, topic string, message []byte) {
+import "github.com/rafaelsouzaribeiro/producer/internal/entity"
 
-	c.producer.Producer(addrs, topic, message)
+func (c *ProducerUseCase) Send(addrs []string, topic string, message []byte) {
+
+	queue := entity.NewQueue(addrs, topic, message)
+	c.producer.Send(*queue)
 
 }

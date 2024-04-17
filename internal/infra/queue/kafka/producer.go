@@ -6,25 +6,25 @@ import (
 	"github.com/IBM/sarama"
 	"github.com/rafaelsouzaribeiro/apache-kafka/producer"
 	utils "github.com/rafaelsouzaribeiro/logs/cmd"
+	"github.com/rafaelsouzaribeiro/producer/internal/entity"
 )
 
 type KafkaProducer struct {
-	// Aqui você pode adicionar quaisquer outras dependências que sua implementação precise
 }
 
 func NewKafkaProducer() *KafkaProducer {
 	return &KafkaProducer{}
 }
 
-func (c *KafkaProducer) Producer(addrs []string, topic string, message []byte) {
+func (c *KafkaProducer) Send(queues entity.Queue) {
 	config := sarama.NewConfig()
 	config.Producer.RequiredAcks = sarama.WaitForAll
 	config.Producer.Retry.Max = 5
 	config.Producer.Return.Successes = true
 
-	produc := producer.NewProducer(addrs, topic,
-		sarama.ByteEncoder(message), config, func(messages string) {
-			utils.Insert(topic, messages, time.Now())
+	produc := producer.NewProducer(queues.Addrs, queues.Topic,
+		sarama.ByteEncoder(queues.Message), config, func(messages string) {
+			utils.Insert(queues.Topic, messages, time.Now())
 		})
 	prod, err := produc.GetProducer()
 

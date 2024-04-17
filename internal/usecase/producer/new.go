@@ -1,14 +1,14 @@
 package producer
 
 import (
-	"github.com/rafaelsouzaribeiro/producer/internal/ports"
+	"github.com/rafaelsouzaribeiro/producer/internal/entity"
 )
 
 type ProducerUseCase struct {
-	producer ports.Iproducer
+	producer entity.Iproducer
 }
 
-func NewProducerUseCase(e ports.Iproducer) *ProducerUseCase {
+func NewProducerUseCase(e entity.Iproducer) *ProducerUseCase {
 	return &ProducerUseCase{
 		producer: e,
 	}
