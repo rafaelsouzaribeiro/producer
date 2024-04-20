@@ -5,7 +5,7 @@ go 1.21.4
 require (
 	github.com/IBM/sarama v1.43.1
 	github.com/rafaelsouzaribeiro/apache-kafka v1.5.0
-	github.com/rafaelsouzaribeiro/logs v1.4.0
+	github.com/rafaelsouzaribeiro/logs v1.5.0
 )
 
 require (
