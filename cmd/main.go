@@ -1,6 +1,8 @@
 package main
 
 import (
+	"sync"
+
 	"github.com/rafaelsouzaribeiro/producer/pkg"
 	"github.com/rafaelsouzaribeiro/producer/pkg/kafka"
 )
@@ -13,5 +15,14 @@ func main() {
 		Topic: "contact-adm-insert",
 	}
 
-	producer.Send(&ms)
+	var wg sync.WaitGroup
+	wg.Add(1)
+
+	go func() {
+		producer.Send(&ms)
+		wg.Done()
+	}()
+
+	wg.Wait()
+
 }
