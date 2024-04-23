@@ -11,7 +11,7 @@ import (
 func (brokers *Brokers) Send(ms *pkg.Message) {
 	writerConfig := kafka.WriterConfig{
 		Brokers: brokers.Brokers,
-		Topic:   brokers.Topic,
+		Topic:   ms.Topic,
 	}
 
 	writer := kafka.NewWriter(writerConfig)
