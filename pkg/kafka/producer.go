@@ -6,17 +6,17 @@ import (
 
 	"github.com/rafaelsouzaribeiro/producer/pkg"
 	"github.com/segmentio/kafka-go"
+	apmkafkago "github.com/sohaibomr/apm-kafkago"
 )
 
 func (brokers *Brokers) Send(ms *pkg.Message) {
-	writerConfig := kafka.WriterConfig{
+	kWriter := kafka.NewWriter(kafka.WriterConfig{
 		Brokers: brokers.Brokers,
 		Topic:   ms.Topic,
-	}
+	})
 
-	writer := kafka.NewWriter(writerConfig)
+	writer := apmkafkago.WrapWriter(kWriter)
 
-	defer writer.Close()
 	m := kafka.Message{
 		Value: []byte(ms.Value),
 	}
@@ -26,4 +26,5 @@ func (brokers *Brokers) Send(ms *pkg.Message) {
 	if err != nil {
 		fmt.Println("Error sending message:", err)
 	}
+
 }
