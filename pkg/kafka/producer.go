@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	apmkafkago "github.com/rafaelsouzaribeiro/apm-kafkago/pkg"
 	"github.com/rafaelsouzaribeiro/producer/pkg"
 	"github.com/segmentio/kafka-go"
-	apmkafkago "github.com/sohaibomr/apm-kafkago"
 )
 
 func (brokers *Brokers) Send(ms *pkg.Message) {
