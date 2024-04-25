@@ -5,17 +5,24 @@ import (
 
 	"github.com/rafaelsouzaribeiro/producer/pkg"
 	exec "github.com/rafaelsouzaribeiro/producer/pkg/kafka"
-	"github.com/segmentio/kafka-go"
 )
 
 func main() {
-	header := []kafka.Header{{Key: "your-header-key", Value: []byte("your-header-value")}}
-
-	producer := exec.NewBrokers([]string{"springboot:9092"}, header)
+	producer := exec.NewBrokers([]string{"springboot:9092"})
 
 	ms := pkg.Message{
 		Value: "Testar",
 		Topic: "contact-adm-insert",
+		Headers: []pkg.Header{
+			{
+				Key:   "your-header-key1",
+				Value: "your-header-value1",
+			},
+			{
+				Key:   "your-header-key2",
+				Value: "your-header-value2",
+			},
+		},
 	}
 
 	var wg sync.WaitGroup
