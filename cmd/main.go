@@ -4,11 +4,14 @@ import (
 	"sync"
 
 	"github.com/rafaelsouzaribeiro/producer/pkg"
-	"github.com/rafaelsouzaribeiro/producer/pkg/kafka"
+	exec "github.com/rafaelsouzaribeiro/producer/pkg/kafka"
+	"github.com/segmentio/kafka-go"
 )
 
 func main() {
-	producer := kafka.NewBrokers([]string{"springboot:9092"})
+	header := []kafka.Header{{Key: "your-header-key", Value: []byte("your-header-value")}}
+
+	producer := exec.NewBrokers([]string{"springboot:9092"}, header)
 
 	ms := pkg.Message{
 		Value: "Testar",
