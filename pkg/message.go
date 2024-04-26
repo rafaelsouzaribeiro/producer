@@ -2,7 +2,7 @@ package pkg
 
 type Message struct {
 	Value   string
-	Topic   string
+	Topic   []string
 	Headers []Header
 }
 
