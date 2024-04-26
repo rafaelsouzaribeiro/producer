@@ -10,23 +10,31 @@ import (
 	"github.com/segmentio/kafka-go/protocol"
 )
 
-func (brokers *Brokers) Send(ms *pkg.Message) {
+func (brokers *Brokers) Send(messages *[]pkg.Message) {
+	if len(*messages) == 0 {
+		fmt.Println("No messages to send")
+		return
+	}
+
 	kWriter := kafka.NewWriter(kafka.WriterConfig{
 		Brokers: brokers.Brokers,
-		Topic:   ms.Topic,
+		Topic:   (*messages)[0].Topic,
 	})
 
 	writer := apmkafkago.WrapWriter(kWriter)
 
-	m := kafka.Message{
-		Value:   []byte(ms.Value),
-		Headers: *brokers.GetHeader(ms),
+	var kafkaMessages []kafka.Message
+	for _, ms := range *messages {
+		kafkaMessages = append(kafkaMessages, kafka.Message{
+			Value:   []byte(ms.Value),
+			Headers: *brokers.GetHeader(&ms),
+		})
 	}
 
-	err := writer.WriteMessages(context.Background(), m)
+	err := writer.WriteMessages(context.Background(), kafkaMessages...)
 
 	if err != nil {
-		fmt.Println("Error sending message:", err)
+		fmt.Println("Error sending messages:", err)
 	}
 
 }
