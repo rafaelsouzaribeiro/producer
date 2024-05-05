@@ -12,7 +12,7 @@ func main() {
 
 	ms := pkg.Message{
 		Value: "Testar",
-		Topic: []string{"contact-adm-insert"},
+		Topic: "contact-adm-insert",
 		Headers: []pkg.Header{
 			{
 				Key:   "your-header-key1",

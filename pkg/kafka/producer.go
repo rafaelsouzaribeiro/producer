@@ -13,7 +13,7 @@ import (
 func (brokers *Brokers) Send(ms *pkg.Message) {
 	kWriter := kafka.NewWriter(kafka.WriterConfig{
 		Brokers: brokers.Brokers,
-		Topic:   ms.Topic[0],
+		Topic:   ms.Topic,
 	})
 
 	writer := apmkafkago.WrapWriter(kWriter)
