@@ -10,7 +10,7 @@ import (
 )
 
 var count int = 0
-var producer = exec.NewBrokers([]string{"springboot:9092"})
+var producer = exec.NewBrokers(&[]string{"springboot:9092"})
 var wg sync.WaitGroup
 
 func BenchmarkWriter(b *testing.B) {

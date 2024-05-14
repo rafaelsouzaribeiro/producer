@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	producer := exec.NewBrokers([]string{"springboot:9092"})
+	producer := exec.NewBrokers(&[]string{"springboot:9092"})
 
 	ms := pkg.Message{
 		Value: "Testar",

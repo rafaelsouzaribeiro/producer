@@ -4,9 +4,9 @@ type Brokers struct {
 	Brokers []string
 }
 
-func NewBrokers(brokers []string) *Brokers {
+func NewBrokers(brokers *[]string) *Brokers {
 
 	return &Brokers{
-		Brokers: brokers,
+		Brokers: *brokers,
 	}
 }
