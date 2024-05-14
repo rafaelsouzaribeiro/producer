@@ -3,7 +3,7 @@ package pkg
 type Message struct {
 	Value   string
 	Topic   string
-	Headers []Header
+	Headers *[]Header
 }
 
 type Header struct {

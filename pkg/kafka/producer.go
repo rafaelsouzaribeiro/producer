@@ -33,7 +33,7 @@ func (brokers *Brokers) Send(ms *pkg.Message) {
 
 func (c *Brokers) GetHeader(ms *pkg.Message) *[]protocol.Header {
 	var headers []protocol.Header
-	for _, header := range ms.Headers {
+	for _, header := range *ms.Headers {
 		headers = append(headers, protocol.Header{
 			Key:   header.Key,
 			Value: []byte(header.Value),

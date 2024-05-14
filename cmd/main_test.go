@@ -21,7 +21,7 @@ func BenchmarkWriter(b *testing.B) {
 		ms := pkg.Message{
 			Value: "Test" + strconv.Itoa(count),
 			Topic: "contact-adm-insert",
-			Headers: []pkg.Header{
+			Headers: &[]pkg.Header{
 				{
 					Key:   "your-header-key" + strconv.Itoa(count),
 					Value: "your-header-value" + strconv.Itoa(count),
