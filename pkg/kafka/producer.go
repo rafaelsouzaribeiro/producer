@@ -19,8 +19,11 @@ func (brokers *Brokers) Send(ms *pkg.Message) {
 	writer := apmkafkago.WrapWriter(kWriter)
 
 	m := kafka.Message{
-		Value:   []byte(ms.Value),
-		Headers: *brokers.GetHeader(ms),
+		Value: []byte(ms.Value),
+	}
+
+	if len(*ms.Headers) > 0 {
+		m.Headers = *brokers.GetHeader(ms)
 	}
 
 	err := writer.WriteMessages(context.Background(), m)
