@@ -22,7 +22,7 @@ func (brokers *Brokers) Send(ms *pkg.Message) {
 		Value: []byte(ms.Value),
 	}
 
-	if len(*ms.Headers) > 0 {
+	if ms.Headers != nil && len(*ms.Headers) > 0 {
 		m.Headers = *brokers.GetHeader(ms)
 	}
 
